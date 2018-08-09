@@ -2,6 +2,7 @@
 package main
 
 import (
+    "fmt"
     "net/http"
 
     "github.com/aniiyengar/fbpedia/api/utils"
@@ -9,9 +10,8 @@ import (
 )
 
 func main() {
-    http.Handle("/api/fb_auth", utils.HttpCors(
-        handlers.FbAuthHandler{},
-    ))
+    http.Handle("/api/fb_auth", utils.HttpCors(handlers.FbAuthHandler{}))
 
+    fmt.Println("Listening on :9004")
     http.ListenAndServe(":9004", nil)
 }

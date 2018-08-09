@@ -15,14 +15,11 @@ func HttpAbort(w http.ResponseWriter, r *http.Request, status int, msg string) {
 
 func HttpCors(h http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        if r.Method == "OPTIONS" {
-            headers := w.Header()
-            headers.Add("Access-Control-Allow-Origin", "*")
-            headers.Add("Access-Control-Allow-Headers", "GET, POST, OPTIONS")
-            headers.Add("Vary", "Origin")
-            headers.Add("Vary", "Access-Control-Request-Headers")
-        } else {
-            h.ServeHTTP(w, r)
-        }
+        headers := w.Header()
+        headers.Add("Access-Control-Allow-Origin", "*")
+        headers.Add("Access-Control-Allow-Headers", "GET, POST, OPTIONS")
+        headers.Add("Vary", "Origin")
+        headers.Add("Vary", "Access-Control-Request-Headers")
+        h.ServeHTTP(w, r)
     })
 }

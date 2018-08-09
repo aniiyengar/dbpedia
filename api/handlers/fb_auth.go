@@ -14,12 +14,6 @@ import (
 
 type FbAuthHandler struct {}
 
-type fbTokenResponse struct {
-    AccessToken string `json:"access_token"`
-    TokenType string `json:"token_type"`
-    ExpiresIn int `json:"expires_in"`
-}
-
 func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     // Validate the request. Only POSTs can make it.
     if r.Method != "POST" {
@@ -56,11 +50,21 @@ func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
         return
     }
 
+    type fbTokenResponse struct {
+        AccessToken string `json:"access_token"`
+        TokenType string `json:"token_type"`
+        ExpiresIn int `json:"expires_in"`
+    }
+
     var result fbTokenResponse
     err = json.NewDecoder(resp.Body).Decode(&result)
     if err != nil {
         // Error decoding JSON
         utils.HttpAbort(w, r, 401, "Error authenticating code: FB auth response decoding failed")
+        return
+    } else if result.AccessToken == "" {
+        // No token received
+        utils.HttpAbort(w, r, 401, "Error authenticating code: FB auth returned blank token")
         return
     }
 
