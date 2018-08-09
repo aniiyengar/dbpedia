@@ -1,5 +1,5 @@
 
-import api from './request';
+import axios from 'axios';
 
 // Action type constants
 
@@ -23,7 +23,7 @@ export const sendFbAuthRequest = (code, state) => (dispatch, getState) => {
             type: FB_AUTH_REQUEST_SENT,
         });
 
-        api.get('/fb_auth?code=' + code + '?state=' + state)
+        axios.post('http://localhost:9004/api/fb_auth?code=' + code)
         .then(({ data }) => {
             dispatch({
                 type: FB_AUTH_REQUEST_SUCCESS,

@@ -7,7 +7,9 @@ export default class extends React.Component {
     render() {
         return (
             <div className='fp-wiki-nav'>
-                <div className='fp-wiki-nav-item fp-wiki-nav-title'>
+                <div
+                    className='fp-wiki-nav-item fp-wiki-nav-title'
+                    onClick={() => { location.href = '/' }}>
                     fbpedia
                 </div>
                 <div className='fp-wiki-nav-item fp-wiki-nav-right'>

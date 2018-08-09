@@ -23,7 +23,7 @@ class Login extends React.Component {
                     fbpedia uses your Facebook account to generate and retrieve
                     Facebook posts. To use it, you need to authorize Facebook to <b>post on
                     your behalf</b>, <b>read your posts and comments</b>,
-                    and <b>get basic personal info</b>.
+                    and <b>retrieve basic personal info</b>.
                 </p>
                 <button
                     className='fp-button-prominent'

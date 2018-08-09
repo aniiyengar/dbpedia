@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
 import WikiNav from './wikiNav';

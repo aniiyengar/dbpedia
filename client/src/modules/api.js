@@ -6,9 +6,13 @@ import axios from 'axios';
 class API {
     constructor(baseUrl) {
         this.url = baseUrl;
+
+        this.get = this.get.bind(this);
+        this.post = this.post.bind(this);
+        this.put = this.put.bind(this);
     }
 
-    get(endpoint, options) {
+    get(endpoint, options = {}) {
         return axios({
             ...options,
             method: 'get',
@@ -16,7 +20,7 @@ class API {
         });
     }
 
-    post(endpoint, options) {
+    post(endpoint, options = {}) {
         return axios({
             ...options,
             method: 'post',
@@ -24,7 +28,7 @@ class API {
         });
     }
 
-    put(endpoint, options) {
+    put(endpoint, options = {}) {
         return axios({
             ...options,
             method: 'put',
@@ -33,4 +37,4 @@ class API {
     }
 };
 
-export default new API('http://localhost:9004');
+export default new API('http://localhost:9004/api');
