@@ -2,12 +2,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import WikiNav from './wikiNav';
 import WikiMain from './wikiMain';
 
 import '../stylesheets/main';
 
-export default class extends React.Component {
+class App extends React.Component {
     render() {
         return [
             <WikiNav key='wikiNav' />,
@@ -15,3 +18,7 @@ export default class extends React.Component {
         ];
     }
 };
+
+export default withRouter(
+    connect(undefined, undefined)(App)
+);

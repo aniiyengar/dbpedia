@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-    http.Handle("/api/fb_auth", utils.HttpCors(handlers.FbAuthHandler{}))
+    http.Handle("/api/fb/auth", utils.HttpCors(handlers.FbAuthHandler{}))
 
     fmt.Println("Listening on :9004")
     http.ListenAndServe(":9004", nil)

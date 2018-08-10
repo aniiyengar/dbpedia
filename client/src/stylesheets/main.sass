@@ -17,10 +17,13 @@ $lightGray: #f5f5f5
 $mediumGray: #aeaeae
 $darkGray: #777
 $darkerGray: #444
+$darkBlue: rgb(32, 87, 155)
+$darkerBlue: rgb(16, 48, 89)
 $dist: 40px
 
 +font('PlayfairDisplay', 'Bold')
 +font('OpenSans', 'Light')
++font('OpenSans', 'Regular')
 +font('OpenSans', 'Semibold')
 
 *
@@ -44,17 +47,22 @@ html, body, #root
 .fp-wiki-nav
     height: $navHeight
     background-color: white
-    color: $darkerGray
-    font-family: 'PlayfairDisplay Bold'
     font-size: 1.2em
     display: flex
     flex-direction: row
     padding: 0 $dist * 4
+    font-family: 'PlayfairDisplay Bold'
+
+    a
+        text-decoration: none
+        color: inherit
 
     .fp-wiki-nav-item
         height: $navHeight / 2
         margin: $navHeight / 4 0
         line-height: $navHeight / 2
+        transition: color 0.1s ease
+        color: $darkGray
         +noselect
         cursor: pointer
 
@@ -65,6 +73,8 @@ html, body, #root
         margin-right: auto
 
     .fp-wiki-nav-right
+        font-family: 'OpenSans Light'
+
         &:not(:last-child)
             margin-right: 20px
 
@@ -88,6 +98,16 @@ html, body, #root
 
     b
         font-family: 'OpenSans Semibold'
+        color: $darkerGray
+
+    a
+        font-family: 'OpenSans Regular'
+        text-decoration: none
+        color: $darkBlue
+        transition: color 0.1 ease
+
+        &:hover
+            color: $darkerBlue
 
 .fp-button-prominent
     padding: 16px
@@ -100,6 +120,11 @@ html, body, #root
     font-family: 'OpenSans Semibold'
     color: white
     margin: 30px 0
+    transition: background-color 0.1s ease
+    +noselect
+
+    &:hover
+        background-color: $darkGray
 
 .fp-spinner-container
     height: 50px
@@ -118,3 +143,12 @@ html, body, #root
         & b
             position: relative
             top: -3px
+
+.fp-router-fade-enter
+    opacity: 0
+    z-index: 1
+
+.fp-router-fade-enter.fp-router-fade-enter-active
+    opacity: 1
+    background-color: red
+    transition: opacity 0.5s ease

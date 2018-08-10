@@ -47,7 +47,11 @@ class FbRedirect extends React.Component {
 
     render() {
         if (this.state.success === undefined) {
-            return <Spinner text='Authenticating...' />;
+            return (
+                <div className='fp-small-container'>
+                    <Spinner text='Authenticating...' />
+                </div>
+            );
         } else if (this.state.success) {
             // It worked!
             return <Redirect to='/' />

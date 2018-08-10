@@ -8,13 +8,13 @@ import history from './history';
 import rootReducer from './modules';
 
 const middleware = [
-    routerMiddleware(history),
     thunk,
+    routerMiddleware(history),
     logger,
 ];
 
 export default createStore(
     connectRouter(history)(rootReducer),
     {},
-    applyMiddleware(...middleware),
+    compose(applyMiddleware(...middleware)),
 );

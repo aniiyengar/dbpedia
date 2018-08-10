@@ -10,6 +10,7 @@ import (
     "encoding/json"
 
     "github.com/aniiyengar/fbpedia/api/utils"
+    "github.com/aniiyengar/fbpedia/api/fb"
 )
 
 type FbAuthHandler struct {}
@@ -70,9 +71,23 @@ func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
     type response struct {
         AccessToken string
+        UserId string
+        UserName string
+    }
+
+    user, err := fb.GetUserFromToken(result.AccessToken)
+    if err != nil {
+        // Error getting user info
+        utils.HttpAbort(w, r, 401, "Error getting user info")
+        return
     }
 
     w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(response{ AccessToken: result.AccessToken })
+    json.NewEncoder(w).Encode(response{
+        AccessToken: result.AccessToken,
+        UserId: user.Id,
+        UserName: user.Name,
+    })
+
     return
 }

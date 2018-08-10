@@ -1,5 +1,5 @@
 
-import axios from 'axios';
+import api from './api';
 
 // Action type constants
 
@@ -11,6 +11,9 @@ export const FB_AUTH_REQUEST_FAIL = 'AUTH::FB_AUTH_REQUEST_FAIL';
 
 export const authInitialState = {
     fbAuthSecret: '',
+    fbUsername: '',
+    fbUserId: '',
+
     fbAuthRequestOut: false,
     fbAuthRequestError: null,
 };
@@ -23,11 +26,11 @@ export const sendFbAuthRequest = (code, state) => (dispatch, getState) => {
             type: FB_AUTH_REQUEST_SENT,
         });
 
-        axios.post('http://localhost:9004/api/fb_auth?code=' + code)
+        api.post('/fb/auth?code=' + code)
         .then(({ data }) => {
             dispatch({
                 type: FB_AUTH_REQUEST_SUCCESS,
-                payload: data.AccessToken,
+                payload: data,
             });
 
             resolve();
@@ -56,7 +59,9 @@ export default (state = authInitialState, action) => {
             return {
                 ...state,
                 fbAuthRequestOut: false,
-                fbAuthSecret: action.payload,
+                fbAuthSecret: action.payload.AccessToken,
+                fbUserId: action.payload.UserId,
+                fbUsername: action.payload.UserName,
             };
         case FB_AUTH_REQUEST_FAIL:
             return {
