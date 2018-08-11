@@ -18,7 +18,7 @@ type FbAuthHandler struct {}
 func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     // Validate the request. Only POSTs can make it.
     if r.Method != "POST" {
-        utils.HttpAbort(w, r, 405, "Cannot POST /fb_auth")
+        utils.Abort(w, r, 405, "Cannot POST /fb_auth")
         return
     }
 
@@ -27,7 +27,8 @@ func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     queryCode := q.Get("code")
     if queryCode == "" {
         // Auth code was not provided; abort request
-        utils.HttpAbort(w, r, 400, "Invalid/missing auth code")
+        utils.Error("Invalid/missing auth code from FB API")
+        utils.Abort(w, r, 400, "Invalid/missing auth code")
         return
     }
 
@@ -47,7 +48,7 @@ func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     )
     if err != nil {
         // Some error occurred making the request.
-        utils.HttpAbort(w, r, 401, "Error authenticating code: FB auth request failed")
+        utils.Abort(w, r, 401, "Error authenticating code: FB auth request failed")
         return
     }
 
@@ -61,11 +62,11 @@ func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     err = json.NewDecoder(resp.Body).Decode(&result)
     if err != nil {
         // Error decoding JSON
-        utils.HttpAbort(w, r, 401, "Error authenticating code: FB auth response decoding failed")
+        utils.Abort(w, r, 401, "Error authenticating code: FB auth response decoding failed")
         return
     } else if result.AccessToken == "" {
         // No token received
-        utils.HttpAbort(w, r, 401, "Error authenticating code: FB auth returned blank token")
+        utils.Abort(w, r, 401, "Error authenticating code: FB auth returned blank token")
         return
     }
 
@@ -78,7 +79,7 @@ func (h FbAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     user, err := fb.GetUserFromToken(result.AccessToken)
     if err != nil {
         // Error getting user info
-        utils.HttpAbort(w, r, 401, "Error getting user info")
+        utils.Abort(w, r, 401, "Error getting user info")
         return
     }
 
