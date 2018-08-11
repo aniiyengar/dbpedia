@@ -7,6 +7,7 @@ import subprocess as sub
 from pyfiglet import Figlet
 import os
 import sys
+import argparse
 
 def clear():
     if os.name == 'nt':
@@ -20,8 +21,21 @@ def blue(s, end = '\n'):
 def yellow(s, end = '\n'):
     return '\033[93m' + s.strip() + '\x1b[0m' + end
 
+parser = argparse.ArgumentParser(description='fbpedia dev')
+parser.add_argument(
+    '--debug_api',
+    action='store_true',
+    dest='debug_api',
+    default=False,
+)
+args = parser.parse_args()
+
 puts = sys.stdout.write
-devnull = open(os.devnull, 'w')
+client_output = open(os.devnull, 'w')
+if args.debug_api:
+    server_output = sys.stdout
+else:
+    server_output = open(os.devnull, 'w')
 
 puts(clear())
 
@@ -45,21 +59,18 @@ client = sub.Popen(
         '--content-base',   'client/',
         '--config',         'client/webpack.config.js'
     ],
-    stdout=devnull,
-    stderr=sub.STDOUT,
+    stdout=client_output,
+    stderr=sys.stderr,
 )
 puts(
     blue('Running client on    :8005')
 )
 
 server = sub.Popen(
-    [
-        'realize', 'start',
-        '--run', '8004'
-    ],
-    stdout=devnull,
-    stderr=sub.STDOUT,
-    cwd='api',
+    ['watcher'],
+    stdout=server_output,
+    stderr=sys.stderr,
+    cwd='./api',
 )
 puts(
     blue('Running API on       :8004')

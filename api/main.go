@@ -20,15 +20,14 @@ var middleware = []utils.Middleware{
 }
 
 func main() {
+    var port string
     if len(os.Args) != 2 {
         // Need to specify port
-        utils.Critical("API: Must specify port")
+        port = "8004"
+    } else {
+        port = os.Args[1]
     }
 
-    // Initialize app configuration
-    utils.Config()
-
-    port := os.Args[1]
     for route, handler := range routes {
         http.Handle(route, utils.ComposeMiddleware(middleware)(handler))
     }
