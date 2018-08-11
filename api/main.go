@@ -2,7 +2,8 @@
 package main
 
 import (
-    "fmt"
+    "os"
+    "log"
     "net/http"
 
     "github.com/aniiyengar/fbpedia/api/utils"
@@ -10,8 +11,14 @@ import (
 )
 
 func main() {
-    http.Handle("/api/fb/auth", utils.HttpCors(handlers.FbAuthHandler{}))
+    if len(os.Args) != 2 {
+        // Need to specify port
+        log.Fatal("API: Must specify port")
+    }
 
-    fmt.Println("Listening on :9004")
-    http.ListenAndServe(":9004", nil)
+    port := os.Args[1]
+    http.Handle("/api/fb/auth", utils.HttpCors(handlers.FbAuthHandler{}))
+    http.Handle("/api/ping", utils.HttpCors(handlers.PongHandler{}))
+
+    http.ListenAndServe(":" + port, nil)
 }

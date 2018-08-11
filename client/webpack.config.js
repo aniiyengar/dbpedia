@@ -103,5 +103,10 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         publicPath: path.resolve(__dirname, '/'),
+        proxy: {
+            '/api': 'http://localhost:8004',
+        },
+        open: true,
+        overlay: true,
     },
 };

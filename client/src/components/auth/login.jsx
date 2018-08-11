@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Login extends React.Component {
     handleFbRedirect() {
         const clientId = '607165666132899';
-        const redirectUri = 'http://localhost:8080/fb_redirect';
+        const redirectUri = 'http://localhost:8005/fb_redirect';
         const state = 'user: ani';
 
         window.location =

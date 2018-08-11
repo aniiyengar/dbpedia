@@ -37,4 +37,4 @@ class API {
     }
 };
 
-export default new API('http://localhost:9004/api');
+export default new API('/api');
