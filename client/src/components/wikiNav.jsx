@@ -18,12 +18,12 @@ class WikiNav extends React.Component {
             return [
                 <div
                     key='nav-newpage'
-                    className='fp-wiki-nav-item fp-wiki-nav-right'>
+                    className='dbp-wiki-nav-item dbp-wiki-nav-right'>
                     <FontAwesomeIcon icon={faPlus} />
                 </div>,
                 <div
                     key='nav-search'
-                    className='fp-wiki-nav-item fp-wiki-nav-right'>
+                    className='dbp-wiki-nav-item dbp-wiki-nav-right'>
                     <FontAwesomeIcon icon={faSearch} />
                 </div>,
             ]
@@ -31,7 +31,7 @@ class WikiNav extends React.Component {
             return [
                 <div
                     key='nav-search'
-                    className='fp-wiki-nav-item fp-wiki-nav-right'>
+                    className='dbp-wiki-nav-item dbp-wiki-nav-right'>
                     <Link to='/login'>Login</Link>
                 </div>
             ];
@@ -40,10 +40,10 @@ class WikiNav extends React.Component {
 
     render() {
         return (
-            <div className='fp-wiki-nav'>
+            <div className='dbp-wiki-nav'>
                 <div
-                    className='fp-wiki-nav-item fp-wiki-nav-title'>
-                    <Link to='/'>fbpedia</Link>
+                    className='dbp-wiki-nav-item dbp-wiki-nav-title'>
+                    <Link to='/'>dbpedia</Link>
                 </div>
 
                 { this.getRightIcons() }
@@ -54,7 +54,7 @@ class WikiNav extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.fbAuthSecret !== '',
+    loggedIn: state.auth.dropboxAuthSecret !== '',
 });
 
 export default connect(

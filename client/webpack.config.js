@@ -5,7 +5,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var mode = process.env.FBPEDIA_ENV || 'development';
+var mode = process.env.DBPEDIA_ENV || 'development';
 
 // use MiniCssExtractPlugin in production
 var styleLoader;

@@ -10,7 +10,7 @@ import (
 )
 
 var routes = map[string]http.Handler{
-    "/api/fb/auth": handlers.FbAuthHandler{},
+    "/api/dropbox/auth": handlers.DropboxAuthHandler{},
     "/api/ping": handlers.PongHandler{},
 }
 

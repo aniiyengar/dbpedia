@@ -21,7 +21,7 @@ def blue(s, end = '\n'):
 def yellow(s, end = '\n'):
     return '\033[93m' + s.strip() + '\x1b[0m' + end
 
-parser = argparse.ArgumentParser(description='fbpedia dev')
+parser = argparse.ArgumentParser(description='dbpedia dev')
 parser.add_argument(
     '--debug_api',
     action='store_true',
@@ -42,13 +42,13 @@ puts(clear())
 puts(
     '    ' +
     yellow(
-        Figlet(font='slant').renderText('fbpedia')
+        Figlet(font='slant').renderText('dbpedia')
     ) + '\n\n' +
 
     'App available at \033[1mhttp://localhost:8005\033[0m\n\n'
 
     'You are running the \033[1mdevelopment\033[0m server for\n' +
-    'fbpedia. To create a production build, run\n' +
+    'dbpedia. To create a production build, run\n' +
     'the script ' + yellow('./scripts/build.py', end='') + '.\n\n'
 )
 

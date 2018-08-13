@@ -3,32 +3,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class Login extends React.Component {
-    handleFbRedirect() {
-        const clientId = '607165666132899';
-        const redirectUri = 'http://localhost:8005/fb_redirect';
-        const state = 'user: ani';
+    handleDropboxRedirect() {
+        const clientId = 'ff7q3s5p3finy1s';
+        const redirectUri = 'http://localhost:8005/dropbox_redirect';
+        const state = 'nil';
 
         window.location =
-            'https://www.facebook.com/v3.1/dialog/oauth?'
+            'https://www.dropbox.com/oauth2/authorize?'
+                + 'response_type=' + 'code' + '&'
+                + 'require_role=' + 'personal' + '&'
                 + 'client_id=' + clientId + '&'
                 + 'redirect_uri=' + redirectUri + '&'
-                + 'state=' + state + '';
+                + 'state=' + state + '&';
     }
 
     render() {
         return (
-            <div className='fp-small-container'>
-                <h1 className='fp-wiki-title'>Login</h1>
-                <p className='fp-p'>
-                    fbpedia uses your Facebook account to generate and retrieve
-                    Facebook posts. To use it, you need to authorize Facebook to <b>post on
-                    your behalf</b>, <b>read your posts and comments</b>,
-                    and <b>retrieve basic personal info</b>.
+            <div className='dbp-small-container'>
+                <h1 className='dbp-wiki-title'>Login</h1>
+                <p className='dbp-p'>
+                    dbpedia uses your Dropbox account.
                 </p>
                 <button
-                    className='fp-button-prominent'
-                    onClick={this.handleFbRedirect}>
-                    Login with Facebook
+                    className='dbp-button-prominent'
+                    onClick={this.handleDropboxRedirect}>
+                    Login with Dropbox
                 </button>
             </div>
         );

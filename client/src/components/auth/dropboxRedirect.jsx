@@ -8,10 +8,10 @@ import { bindActionCreators } from 'redux';
 import Spinner from '../spinner';
 
 import {
-    sendFbAuthRequest,
+    sendDropboxAuthRequest,
 } from '../../modules/auth';
 
-class FbRedirect extends React.Component {
+class DropboxRedirect extends React.Component {
     constructor(props) {
         super(props)
 
@@ -27,8 +27,8 @@ class FbRedirect extends React.Component {
             state,
         } = queryString.parse(this.props.location.search);
 
-        if (!this.props.fbAuthRequestOut) {
-            this.props.sendFbAuthRequest(
+        if (!this.props.dropboxAuthRequestOut) {
+            this.props.sendDropboxAuthRequest(
                 code,
                 state,
             )
@@ -48,7 +48,7 @@ class FbRedirect extends React.Component {
     render() {
         if (this.state.success === undefined) {
             return (
-                <div className='fp-small-container'>
+                <div className='dbp-small-container'>
                     <Spinner text='Authenticating...' />
                 </div>
             );
@@ -63,14 +63,14 @@ class FbRedirect extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    fbAuthRequestOut: state.fbAuthRequestOut,
+    dropboxAuthRequestOut: state.dropboxAuthRequestOut,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    sendFbAuthRequest,
+    sendDropboxAuthRequest,
 }, dispatch);
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(FbRedirect);
+)(DropboxRedirect);

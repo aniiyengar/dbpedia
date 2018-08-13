@@ -9,12 +9,12 @@ import WikiHome from './wiki/wikiHome';
 import WikiPage from './wiki/wikiPage';
 
 import Login from './auth/login';
-import FbRedirect from './auth/fbRedirect';
+import DropboxRedirect from './auth/dropboxRedirect';
 
 export default class extends React.Component {
     render() {
         return (
-            <div className='fp-wiki-wrapper'>
+            <div className='dbp-wiki-wrapper'>
                 <Switch>
 
                     <Route
@@ -29,8 +29,8 @@ export default class extends React.Component {
 
                     <Route
                         exact
-                        path='/fb_redirect'
-                        component={ FbRedirect } />
+                        path='/dropbox_redirect'
+                        component={ DropboxRedirect } />
 
                     <Route
                         exact

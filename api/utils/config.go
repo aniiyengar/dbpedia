@@ -10,7 +10,7 @@ import (
     "encoding/json"
 )
 
-type configType map[string]interface{}
+type configType map[string]string
 var config *configType
 var once sync.Once
 

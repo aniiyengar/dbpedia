@@ -36,15 +36,15 @@ html, body, #root
     height: 100%
     overflow: hidden
 
-.fp-wiki-wrapper
+.dbp-wiki-wrapper
     width: 100%
     height: calc(100% - #{$navHeight})
-    background-color: $lightGray
+    background-color: white
     padding: $dist $dist * 4
     overflow-y: scroll
     overflow-x: hidden
 
-.fp-wiki-nav
+.dbp-wiki-nav
     height: $navHeight
     background-color: white
     font-size: 1.2em
@@ -57,7 +57,7 @@ html, body, #root
         text-decoration: none
         color: inherit
 
-    .fp-wiki-nav-item
+    .dbp-wiki-nav-item
         height: $navHeight / 2
         margin: $navHeight / 4 0
         line-height: $navHeight / 2
@@ -69,26 +69,26 @@ html, body, #root
         &:hover
             color: black
 
-    .fp-wiki-nav-title
+    .dbp-wiki-nav-title
         margin-right: auto
 
-    .fp-wiki-nav-right
+    .dbp-wiki-nav-right
         font-family: 'OpenSans Light'
 
         &:not(:last-child)
             margin-right: 20px
 
-.fp-small-container
+.dbp-small-container
     width: 500px
     margin: auto
 
-.fp-wiki-title
+.dbp-wiki-title
     font-family: 'PlayfairDisplay Bold'
     font-size: 3em
     +noselect
     color: $darkerGray
 
-.fp-p
+.dbp-p
     font-family: 'OpenSans Light'
     color: $darkGray
     font-size: 1.1em
@@ -109,7 +109,7 @@ html, body, #root
         &:hover
             color: $darkerBlue
 
-.fp-button-prominent
+.dbp-button-prominent
     padding: 16px
     font-size: 1.1em
     outline: none
@@ -126,7 +126,7 @@ html, body, #root
     &:hover
         background-color: $darkGray
 
-.fp-spinner-container
+.dbp-spinner-container
     height: 50px
     margin: 20px 0
 
@@ -134,7 +134,7 @@ html, body, #root
         display: inline-block
         +vcenter
 
-    & .fp-p
+    & .dbp-p
         color: $darkerGray
         margin: -5px 0 0 15px
         display: inline-block
@@ -144,11 +144,11 @@ html, body, #root
             position: relative
             top: -3px
 
-.fp-router-fade-enter
+.dbp-router-fade-enter
     opacity: 0
     z-index: 1
 
-.fp-router-fade-enter.fp-router-fade-enter-active
+.dbp-router-fade-enter.dbp-router-fade-enter-active
     opacity: 1
     background-color: red
     transition: opacity 0.5s ease

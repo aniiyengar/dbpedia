@@ -3,33 +3,32 @@ import api from './api';
 
 // Action type constants
 
-export const FB_AUTH_REQUEST_SENT = 'AUTH::FB_AUTH_REQUEST_SENT';
-export const FB_AUTH_REQUEST_SUCCESS = 'AUTH::FB_AUTH_REQUEST_SUCCESS';
-export const FB_AUTH_REQUEST_FAIL = 'AUTH::FB_AUTH_REQUEST_FAIL';
+export const DROPBOX_AUTH_REQUEST_SENT = 'AUTH::DROPBOX_AUTH_REQUEST_SENT';
+export const DROPBOX_AUTH_REQUEST_SUCCESS = 'AUTH::DROPBOX_AUTH_REQUEST_SUCCESS';
+export const DROPBOX_AUTH_REQUEST_FAIL = 'AUTH::DROPBOX_AUTH_REQUEST_FAIL';
 
 // Initial state
 
 export const authInitialState = {
-    fbAuthSecret: '',
-    fbUsername: '',
-    fbUserId: '',
+    dropboxAuthSecret: '',
+    dropboxUsername: '',
 
-    fbAuthRequestOut: false,
-    fbAuthRequestError: null,
+    dropboxAuthRequestOut: false,
+    dropboxAuthRequestError: null,
 };
 
 // Action creators
 
-export const sendFbAuthRequest = (code, state) => (dispatch, getState) => {
+export const sendDropboxAuthRequest = (code, state) => (dispatch, getState) => {
     return new Promise((resolve, reject) => {
         dispatch({
-            type: FB_AUTH_REQUEST_SENT,
+            type: DROPBOX_AUTH_REQUEST_SENT,
         });
 
-        api.post('/fb/auth?code=' + code)
+        api.post('/dropbox/auth?code=' + code)
         .then(({ data }) => {
             dispatch({
-                type: FB_AUTH_REQUEST_SUCCESS,
+                type: DROPBOX_AUTH_REQUEST_SUCCESS,
                 payload: data,
             });
 
@@ -37,7 +36,7 @@ export const sendFbAuthRequest = (code, state) => (dispatch, getState) => {
         })
         .catch(err => {
             dispatch({
-                type: FB_AUTH_REQUEST_FAIL,
+                type: DROPBOX_AUTH_REQUEST_FAIL,
                 error: err,
             });
 
@@ -50,24 +49,23 @@ export const sendFbAuthRequest = (code, state) => (dispatch, getState) => {
 
 export default (state = authInitialState, action) => {
     switch (action.type) {
-        case FB_AUTH_REQUEST_SENT:
+        case DROPBOX_AUTH_REQUEST_SENT:
             return {
                 ...state,
-                fbAuthRequestOut: true,
+                dropboxAuthRequestOut: true,
             };
-        case FB_AUTH_REQUEST_SUCCESS:
+        case DROPBOX_AUTH_REQUEST_SUCCESS:
             return {
                 ...state,
-                fbAuthRequestOut: false,
-                fbAuthSecret: action.payload.AccessToken,
-                fbUserId: action.payload.UserId,
-                fbUsername: action.payload.UserName,
+                dropboxAuthRequestOut: false,
+                dropboxAuthSecret: action.payload.AccessToken,
+                dropboxUsername: action.payload.Username,
             };
-        case FB_AUTH_REQUEST_FAIL:
+        case DROPBOX_AUTH_REQUEST_FAIL:
             return {
                 ...state,
-                fbAuthRequestOut: false,
-                fbAuthRequestError: action.error,
+                dropboxAuthRequestOut: false,
+                dropboxAuthRequestError: action.error,
             };
         default:
             return state;
