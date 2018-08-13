@@ -13,8 +13,31 @@ const middleware = [
     logger,
 ];
 
-export default createStore(
+const store = createStore(
     connectRouter(history)(rootReducer),
-    {},
+    JSON.parse(localStorage.getItem('state')) || {},
     compose(applyMiddleware(...middleware)),
 );
+
+const persistedState = state => {
+    return {
+        auth: state.auth,
+    };
+};
+
+let lastCallTime;
+store.subscribe(() => {
+    let unset = false;
+    if (!lastCallTime) {
+        lastCallTime = (new Date()).getTime();
+        unset = true;
+    }
+    if ((new Date()).getTime() - lastCallTime >= 500 || unset) {
+        localStorage.setItem(
+            'state',
+            JSON.stringify(persistedState(store.getState())),
+        );
+    }
+});
+
+export default store;

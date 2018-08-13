@@ -1,5 +1,5 @@
 
-// Facebook authentication handler. Generates a Dropbox OAuth token.
+// Dropbox authentication handler. Generates a Dropbox OAuth token.
 
 package handlers
 
@@ -8,8 +8,8 @@ import (
     "encoding/json"
     "bytes"
 
-    "github.com/aniiyengar/fbpedia/api/utils"
-    "github.com/aniiyengar/fbpedia/api/dropbox"
+    "github.com/aniiyengar/dbpedia/api/utils"
+    "github.com/aniiyengar/dbpedia/api/dropbox"
 )
 
 type DropboxAuthHandler struct {}

@@ -5,8 +5,8 @@ import (
     "os"
     "net/http"
 
-    "github.com/aniiyengar/fbpedia/api/utils"
-    "github.com/aniiyengar/fbpedia/api/handlers"
+    "github.com/aniiyengar/dbpedia/api/utils"
+    "github.com/aniiyengar/dbpedia/api/handlers"
 )
 
 var routes = map[string]http.Handler{

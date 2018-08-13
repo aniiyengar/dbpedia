@@ -40,7 +40,7 @@ else:
 puts(clear())
 
 puts(
-    '    ' +
+    '       ' +
     yellow(
         Figlet(font='slant').renderText('dbpedia')
     ) + '\n\n' +
