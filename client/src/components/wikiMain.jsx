@@ -7,7 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import WikiHome from './wiki/wikiHome';
 import WikiPage from './wiki/wikiPage';
-import WikiAbout from './wiki/WikiAbout';
+import WikiAbout from './wiki/wikiAbout';
 
 import Login from './auth/login';
 import DropboxRedirect from './auth/dropboxRedirect';
