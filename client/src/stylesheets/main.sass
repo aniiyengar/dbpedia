@@ -36,11 +36,14 @@ html, body, #root
     height: 100%
     overflow: hidden
 
+.noselect
+    +noselect
+
 .dbp-wiki-wrapper
     width: 100%
     height: calc(100% - #{$navHeight})
     background-color: white
-    padding: $dist $dist * 4
+    padding: $dist $dist * 4 $dist * 3 $dist * 4
     overflow-y: scroll
     overflow-x: hidden
 
@@ -52,6 +55,7 @@ html, body, #root
     flex-direction: row
     padding: 0 $dist * 4
     font-family: 'PlayfairDisplay Bold'
+    +noselect
 
     a
         text-decoration: none
@@ -63,7 +67,6 @@ html, body, #root
         line-height: $navHeight / 2
         transition: color 0.1s ease
         color: $darkGray
-        +noselect
         cursor: pointer
 
         &:hover
@@ -78,23 +81,39 @@ html, body, #root
         &:not(:last-child)
             margin-right: 20px
 
+.dbp-wiki-nav-gradient
+    height: $dist * 2
+    width: 100%
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 )
+    position: fixed
+
 .dbp-small-container
     width: 500px
     margin: auto
 
 .dbp-wiki-title
     font-family: 'PlayfairDisplay Bold'
-    font-size: 3em
-    +noselect
     color: $darkerGray
+
+h1.dbp-wiki-title
+    margin-top: 30px
+    margin-bottom: 10px
+    font-size: 3em
+
+h2.dbp-wiki-title
+    margin-top: 30px
+    margin-bottom: 4px
+    font-size: 1.5em
 
 .dbp-p
     font-family: 'OpenSans Light'
-    color: $darkGray
+    color: $darkerGray
     font-size: 1.1em
     margin-top: 20px
     line-height: 180%
-    +noselect
 
     b
         font-family: 'OpenSans Semibold'
@@ -144,11 +163,4 @@ html, body, #root
             position: relative
             top: -3px
 
-.dbp-router-fade-enter
-    opacity: 0
-    z-index: 1
-
-.dbp-router-fade-enter.dbp-router-fade-enter-active
-    opacity: 1
-    background-color: red
-    transition: opacity 0.5s ease
+    +noselect

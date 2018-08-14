@@ -82,3 +82,32 @@ func LoggerMiddleware(h http.Handler) http.Handler {
         h.ServeHTTP(w, r)
     })
 }
+
+// Make requests (mainly to Dropbox).
+func MakeRequest(
+    url string,
+    method string,
+    data []byte,
+    headers map[string]string,
+) (*http.Response, error) {
+    client := &http.Client{}
+    req, err := http.NewRequest(
+        strings.ToUpper(method),
+        url,
+        bytes.NewReader(data),
+    )
+    if err != nil {
+        return &http.Response{}, err
+    }
+
+    for field, header := range headers {
+        req.Header.Add(field, header)
+    }
+
+    resp, err := client.Do(req)
+    if err != nil {
+        return &http.Response{}, err
+    }
+
+    return resp, nil
+}

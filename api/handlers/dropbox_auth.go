@@ -61,7 +61,7 @@ func (h DropboxAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         // Error decoding JSON
         utils.Error("Could not decode JSON from Dropbox auth response")
-        utils.Abort(w, r, 401, "Error authenticating code: Dropbox auth response decoding failed")
+        utils.Abort(w, r, 500, "Error authenticating code: Dropbox auth response decoding failed")
         return
     } else if result.AccessToken == "" {
         // No token received
@@ -73,20 +73,30 @@ func (h DropboxAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     type response struct {
         AccessToken string
         Username string
+        Id string
     }
 
     user, err := dropbox.GetUserFromToken(result.AccessToken, result.AccountId)
     if err != nil {
         // Error getting user info
         utils.Error("Error getting user info from Dropbox")
-        utils.Abort(w, r, 401, "Error getting user info")
+        utils.Abort(w, r, 500, "Error getting user info")
         return
+    }
+
+    exists, err := dropbox.CheckUserInitialized(result.AccountId)
+    if err != nil {
+        utils.Error("Error checking if user is initialized")
+        utils.Abort(w, r, 500, "Error checking if user is initialized...")
+    } else if exists == false {
+        dropbox.InitializeUser(result.AccessToken, result.AccountId)
     }
 
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(response{
         AccessToken: result.AccessToken,
         Username: user.Name["given_name"].(string),
+        Id: user.Id,
     })
 
     return

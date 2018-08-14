@@ -7,6 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import WikiHome from './wiki/wikiHome';
 import WikiPage from './wiki/wikiPage';
+import WikiAbout from './wiki/WikiAbout';
 
 import Login from './auth/login';
 import DropboxRedirect from './auth/dropboxRedirect';
@@ -15,6 +16,7 @@ export default class extends React.Component {
     render() {
         return (
             <div className='dbp-wiki-wrapper'>
+
                 <Switch>
 
                     <Route
@@ -26,6 +28,11 @@ export default class extends React.Component {
                         exact
                         path='/login'
                         component={ Login } />
+
+                    <Route
+                        exact
+                        path='/about'
+                        component={ WikiAbout } />
 
                     <Route
                         exact

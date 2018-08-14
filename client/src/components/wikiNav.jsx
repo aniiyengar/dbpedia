@@ -40,14 +40,17 @@ class WikiNav extends React.Component {
 
     render() {
         return (
-            <div className='dbp-wiki-nav'>
-                <div
-                    className='dbp-wiki-nav-item dbp-wiki-nav-title'>
-                    <Link to='/'>dbpedia</Link>
+            <div>
+                <div className='dbp-wiki-nav'>
+                    <div
+                        className='dbp-wiki-nav-item dbp-wiki-nav-title'>
+                        <Link to='/'>dbpedia</Link>
+                    </div>
+
+                    { this.getRightIcons() }
+
                 </div>
-
-                { this.getRightIcons() }
-
+                <div className='dbp-wiki-nav-gradient'></div>
             </div>
         );
     }

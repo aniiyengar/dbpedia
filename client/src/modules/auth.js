@@ -12,6 +12,7 @@ export const DROPBOX_AUTH_REQUEST_FAIL = 'AUTH::DROPBOX_AUTH_REQUEST_FAIL';
 export const authInitialState = {
     dropboxAuthSecret: '',
     dropboxUsername: '',
+    dropboxAccountId: '',
 
     dropboxAuthRequestOut: false,
     dropboxAuthRequestError: null,
@@ -60,6 +61,7 @@ export default (state = authInitialState, action) => {
                 dropboxAuthRequestOut: false,
                 dropboxAuthSecret: action.payload.AccessToken,
                 dropboxUsername: action.payload.Username,
+                dropboxAccountId: action.payload.Id,
             };
         case DROPBOX_AUTH_REQUEST_FAIL:
             return {
