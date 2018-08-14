@@ -24,23 +24,23 @@ export default class WikiAbout extends React.Component {
                     Most websites store their data on databases. They’re an easy, reliable
                     way of storing data locally. In many cases, shards of databases are spread
                     across servers, so that no single database server experiences a heavy load.
-                    dbpedia, however, works differently: instead of storing the pages
-                    on our servers, we host all our pages on our users’ Dropbox accounts.
+                    dbpedia, instead of storing the pages
+                    on its own servers, hosts its pages on users’ Dropbox accounts.
                 </p>
                 <p className='dbp-p'>
-                    When you log into our app for the first time, we <b>create a folder</b> on
-                    your Dropbox account, and we <b>share that folder</b> with a central account
-                    (owned by dbpedia). We make sure our <b>access is read-only</b>.
+                    When you log into the app for the first time, it <b>creates a folder</b> on
+                    your Dropbox account; it then <b>shares that folder</b> with a central account
+                    (owned by dbpedia). It makes sure that <b>access is read-only</b>.
                     We don’t look at any other data on your account. This access is necessary for
-                    the app to work properly: when you create or edit a page, we (with your
-                    authorization) write those edits, and some extra info, to your dbpedia folder.
+                    the app to work properly: when you create or edit a page, the app (with your
+                    authorization) writes those edits, and some extra info, to your dbpedia folder.
                     (This also means that if you edit/delete your own dbpedia folder, it could get
                     corrupted and this site would be unable to build wiki pages correctly. Please
                     don’t spoil the party.)
                 </p>
                 <p className='dbp-p'>
-                    We also keep a list of all the pages we create on a central repository
-                    located on dbpedia’s central Dropbox account. We do this because
+                    The app also keeps a list of all the pages you create on a central repository
+                    located on its central Dropbox account. This is necessary, because
                     making Dropbox API requests is slow, and storing a little extra data
                     will speed up the process of gathering the necessary information to
                     reconstruct the wiki pages.
@@ -51,7 +51,7 @@ export default class WikiAbout extends React.Component {
                 <p className='dbp-p'>
                     There really isn’t one. Instead of being stored on one server/database, the
                     wiki is stored across (potentially) lots of separate servers, which is cool.
-                    It’s built without using a single database, so it relies entirely on Dropbox
+                    It relies entirely on Dropbox
                     as a persistence layer&mdash;abstracting away the difficult technical
                     challenge of actually storing and maintaining large files securely.
                 </p>
