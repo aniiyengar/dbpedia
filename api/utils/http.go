@@ -83,6 +83,13 @@ func LoggerMiddleware(h http.Handler) http.Handler {
     })
 }
 
+type Request struct {
+    Url string
+    Method string
+    Data []byte
+    Headers map[string]string
+}
+
 // Make requests (mainly to Dropbox).
 func MakeRequest(
     url string,
@@ -110,4 +117,57 @@ func MakeRequest(
     }
 
     return resp, nil
+}
+
+// https://gist.github.com/montanaflynn/ea4b92ed640f790c4b9cee36046a5383
+// Make requests in parallel bounded by CPU capability.
+
+type ParallelRequestResponse struct {
+    RequestIndex int // in case responses need to be ordered
+    Response http.Response
+    Error error
+}
+
+func MakeParallelRequests(reqs []Request, concurrencyLimit int) []ParallelRequestResponse {
+    sem := make(chan struct{}, concurrencyLimit)
+    results := make(chan *ParallelRequestResponse)
+
+    defer func() {
+        close(sem)
+        close(results)
+    }()
+
+    for i, req := range reqs {
+        go func(i int, req Request) {
+            // Blocks semaphore channel until there is room
+            // under bounded limit of requests
+            sem <- struct{}{}
+
+            resp, err := MakeRequest(
+                req.Url,
+                req.Method,
+                req.Data,
+                req.Headers,
+            )
+
+            results <- &ParallelRequestResponse{
+                i, *resp, err,
+            }
+
+            // Unblock this request
+            <- sem
+        }(i, req)
+    }
+
+    var resultList []ParallelRequestResponse
+    for {
+        partialResult := <- results
+        resultList = append(resultList, *partialResult)
+
+        if len(resultList) == len(reqs) {
+            break
+        }
+    }
+
+    return resultList
 }

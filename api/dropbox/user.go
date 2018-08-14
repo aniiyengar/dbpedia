@@ -6,6 +6,7 @@ package dropbox
 import (
     "encoding/json"
     "errors"
+    "io/ioutil"
 
     "github.com/aniiyengar/dbpedia/api/utils"
 )
@@ -171,7 +172,7 @@ func InitializeUser(token string, accountId string) error {
 
     // Lastly, update our `dbpedia_index` to reflect we've
     // added a new user.
-    err = AddUser(accountId)
+    err = AddUserToIndex(accountId)
     if err != nil {
         utils.Debug(err)
         return err
@@ -195,4 +196,51 @@ func CheckUserInitialized(accountId string) (bool, error) {
     }
 
     return initialized, nil
+}
+
+// Add user to index.
+func AddUserToIndex(accountId string) error {
+    indexData, err := GetIndex()
+
+    var exists = false
+    for _, userId := range indexData.Users {
+        if userId == accountId {
+            exists = true
+            break
+        }
+    }
+
+    if exists {
+        // User already exists; it's a sus no-op
+        utils.Warning("User already exists in dbpedia_index: " + accountId)
+        return nil
+    } else {
+        indexData.Users = append(indexData.Users, accountId)
+    }
+
+    centralToken := utils.Config()["DROPBOX_CENTRAL_ACCOUNT_TOKEN"]
+
+    jsonBytes, err := json.Marshal(indexData)
+    reqJson := []byte(`{ "path": "/dbpedia_index.json", "mode": "overwrite", "mute": true }`)
+    resp, err := utils.MakeRequest(
+        "https://content.dropboxapi.com/2/files/upload",
+        "POST",
+        jsonBytes,
+        map[string]string{
+            "Content-Type": "application/octet-stream",
+            "Dropbox-API-Arg": string(reqJson),
+            "Authorization": "Bearer " + centralToken,
+        },
+    )
+
+    if err != nil {
+        return err
+    } else {
+        defer resp.Body.Close()
+    }
+
+    readBytes, err := ioutil.ReadAll(resp.Body)
+    utils.Debug(string(readBytes))
+
+    return nil
 }
