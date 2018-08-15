@@ -83,7 +83,7 @@ html, body, #root
 
 .dbp-wiki-nav-gradient
     pointer-events: none
-    height: $dist * 2
+    height: $dist
     width: 100%
     background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)
     background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)
@@ -109,6 +109,17 @@ h2.dbp-wiki-title
     margin-bottom: 4px
     font-size: 1.5em
 
+.dbp-ul, .dbp-ol
+    list-style-position: outside
+
+.dbp-li
+    font-family: 'OpenSans Light'
+    color: $darkerGray
+    font-size: 1.1em
+    margin-top: 15px
+    line-height: 180%
+    margin-left: 30px
+
 .dbp-p
     font-family: 'OpenSans Light'
     color: $darkerGray
@@ -116,6 +127,14 @@ h2.dbp-wiki-title
     margin-top: 20px
     line-height: 180%
 
+.dbp-code
+    font-family: monospace
+    font-size: 1.1em
+    margin-top: 20px
+    line-height: 180%
+    color: $darkerGray
+
+.dbp-ul, .dbp-ol, .dbp-p
     b
         font-family: 'OpenSans Semibold'
         color: $darkerGray
