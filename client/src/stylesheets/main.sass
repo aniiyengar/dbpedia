@@ -25,6 +25,7 @@ $dist: 40px
 +font('OpenSans', 'Light')
 +font('OpenSans', 'Regular')
 +font('OpenSans', 'Semibold')
++font('RobotoMono', 'Light')
 
 *
     margin: 0
@@ -35,6 +36,9 @@ html, body, #root
     width: 100%
     height: 100%
     overflow: hidden
+
+a
+    cursor: pointer
 
 .noselect
     +noselect
@@ -117,7 +121,7 @@ h2.dbp-wiki-title
     color: $darkerGray
     font-size: 1.1em
     margin-top: 15px
-    line-height: 180%
+    line-height: 28px
     margin-left: 30px
 
 .dbp-p
@@ -125,17 +129,20 @@ h2.dbp-wiki-title
     color: $darkerGray
     font-size: 1.1em
     margin-top: 20px
-    line-height: 180%
+    line-height: 28px
 
 .dbp-code
-    font-family: monospace
-    font-size: 1.1em
+    font-family: 'RobotoMono Light'
+    font-size: 0.85em
     margin-top: 20px
-    line-height: 180%
+    line-height: 28px
     color: $darkerGray
+    padding: 2px
+    border-radius: 2px
+    background-color: #eaeaea
 
 .dbp-ul, .dbp-ol, .dbp-p
-    b
+    strong
         font-family: 'OpenSans Semibold'
         color: $darkerGray
 
@@ -143,10 +150,15 @@ h2.dbp-wiki-title
         font-family: 'OpenSans Regular'
         text-decoration: none
         color: $darkBlue
-        transition: color 0.1 ease
+
+        &:visited
+            color: $darkBlue
 
         &:hover
-            color: $darkerBlue
+            text-decoration: underline
+
+    a .dbp-code
+        font-family: 'RobotoMono Light'
 
 .dbp-button-prominent
     padding: 16px
@@ -179,7 +191,7 @@ h2.dbp-wiki-title
         display: inline-block
         line-height: 50px
 
-        & b
+        & strong
             position: relative
             top: -3px
 
