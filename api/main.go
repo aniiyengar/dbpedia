@@ -12,6 +12,7 @@ import (
 var routes = map[string]http.Handler{
     "/api/dropbox/auth": handlers.DropboxAuthHandler{},
     "/api/ping": handlers.PongHandler{},
+    "/api/write": handlers.WriteHandler{},
 }
 
 var middleware = []utils.Middleware{
