@@ -424,3 +424,17 @@ func GetPageFromShards(shards []PageShard) (string, error) {
 
     return pageData, nil
 }
+
+func GetPageData(pageName string) (string, error) {
+    shards, err := GetPageShards(pageName)
+    if err != nil {
+        return "", errors.New("Unable to retrieve page shards.")
+    }
+
+    pageData, err := GetPageFromShards(shards)
+    if err != nil {
+        return "", errors.New("Unable to turn shards into page data.")
+    }
+
+    return pageData, nil
+}

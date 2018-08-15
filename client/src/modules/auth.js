@@ -62,6 +62,7 @@ export default (state = authInitialState, action) => {
                 dropboxAuthSecret: action.payload.AccessToken,
                 dropboxUsername: action.payload.Username,
                 dropboxAccountId: action.payload.Id,
+                dropboxAuthRequestError: null,
             };
         case DROPBOX_AUTH_REQUEST_FAIL:
             return {

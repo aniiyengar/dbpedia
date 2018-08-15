@@ -27,7 +27,7 @@ class DropboxRedirect extends React.Component {
             state,
         } = queryString.parse(this.props.location.search);
 
-        if (!this.props.dropboxAuthRequestOut) {
+        if (!this.props.auth.dropboxAuthRequestOut) {
             this.props.sendDropboxAuthRequest(
                 code,
                 state,
@@ -63,7 +63,7 @@ class DropboxRedirect extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    dropboxAuthRequestOut: state.dropboxAuthRequestOut,
+    auth: state.auth,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

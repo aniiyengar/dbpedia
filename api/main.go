@@ -13,6 +13,7 @@ var routes = map[string]http.Handler{
     "/api/dropbox/auth": handlers.DropboxAuthHandler{},
     "/api/ping": handlers.PongHandler{},
     "/api/write": handlers.WriteHandler{},
+    "/api/read": handlers.ReadHandler{},
 }
 
 var middleware = []utils.Middleware{
