@@ -23,12 +23,12 @@ const elementTransform = {
     'h2': 'dbp-wiki-title',
 };
 
-const createElement = (name, props, children) => {
+const createElement = allowH1 => (name, props, children) => {
     if (elementTransform.hasOwnProperty(name)) {
         // Default functionality for links in Markdown
         if (name == 'a') {
             props['target'] = '_blank';
-        } else if (name == 'h1') {
+        } else if (name == 'h1' && !allowH1) {
             name = 'h2';
         }
 
@@ -50,7 +50,7 @@ const createElement = (name, props, children) => {
     }
 };
 
-const plugin = function() {
+const plugin = allowH1 => function() {
     this.Compiler = node => {
         const hastLoader = hastSanitize(
             {
@@ -66,12 +66,12 @@ const plugin = function() {
         );
 
         return hastToHyper(
-            createElement,
+            createElement(allowH1),
             hastLoader,
         );
     };
 };
 
-export default text => {
-    return remark().use(plugin).processSync(text).contents;
+export default (text, allowH1 = false) => {
+    return remark().use(plugin(allowH1)).processSync(text).contents;
 }

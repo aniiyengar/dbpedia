@@ -9,6 +9,6 @@ export default class WikiAbout extends React.Component {
         super(props);
     }
     render() {
-        return markdownCompiler(about);
+        return markdownCompiler(about, true);
     }
 }
