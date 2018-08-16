@@ -7,6 +7,8 @@ export const DROPBOX_AUTH_REQUEST_SENT = 'AUTH::DROPBOX_AUTH_REQUEST_SENT';
 export const DROPBOX_AUTH_REQUEST_SUCCESS = 'AUTH::DROPBOX_AUTH_REQUEST_SUCCESS';
 export const DROPBOX_AUTH_REQUEST_FAIL = 'AUTH::DROPBOX_AUTH_REQUEST_FAIL';
 
+export const LOGOUT = 'AUTH::LOGOUT';
+
 // Initial state
 
 export const authInitialState = {
@@ -46,6 +48,8 @@ export const sendDropboxAuthRequest = (code, state) => (dispatch, getState) => {
     });
 };
 
+export const logout = () => ({ type: LOGOUT, });
+
 // Reducer
 
 export default (state = authInitialState, action) => {
@@ -70,6 +74,8 @@ export default (state = authInitialState, action) => {
                 dropboxAuthRequestOut: false,
                 dropboxAuthRequestError: action.error,
             };
+        case LOGOUT:
+            return authInitialState;
         default:
             return state;
     }

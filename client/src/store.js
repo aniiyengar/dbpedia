@@ -10,8 +10,11 @@ import rootReducer from './modules';
 const middleware = [
     thunk,
     routerMiddleware(history),
-    logger,
 ];
+
+if (DBPEDIA_ENV === 'development') {
+    middleware.push(logger);
+}
 
 const store = createStore(
     connectRouter(history)(rootReducer),

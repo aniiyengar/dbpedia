@@ -18,7 +18,7 @@ class WikiHome extends React.Component {
                     { displayText }
                 </h1>
                 <p className='dbp-p'>
-                    <b>dbpedia</b> is a collaborative wiki. Development is in progress.
+                    <strong>dbpedia</strong> is a collaborative wiki. Development is in progress.
                     Learn more <Link to='/about'>here</Link>.
                 </p>
             </div>

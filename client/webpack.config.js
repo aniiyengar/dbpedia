@@ -2,6 +2,12 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var conf = require('../conf.json');
+var inlined = {}
+for (var key of Object.keys(conf)) {
+    inlined[key] = JSON.stringify(conf[key]);
+}
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -102,6 +108,7 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css',
         }),
+        new webpack.DefinePlugin(inlined),
     ],
 
     devServer: {

@@ -38,8 +38,15 @@ type PageEdit struct {
     Diff string         `json:"diff"`
 }
 
+type Page struct {
+    Title string `json:"page_name"`
+    Data string `json:"page_data"`
+}
+
 // All this does is add page to index.
 func AddPageToIndexIfNotExists(pageName string) error {
+    pageName = strings.ToLower(pageName)
+
     indexData, err := GetIndex()
     if err != nil {
         return err
@@ -48,7 +55,7 @@ func AddPageToIndexIfNotExists(pageName string) error {
     exists := false
     pageList := indexData.Pages
     for name, _ := range pageList {
-        if strings.ToLower(name) == pageName {
+        if name == pageName {
             exists = true
             break
         }
@@ -88,6 +95,8 @@ func AddPageToIndexIfNotExists(pageName string) error {
 func GetPageShards(pageName string) ([]PageShard, error) {
     // First, get the page from the index. If it doesn't exist,
     // return a blank Page.
+    pageName = strings.ToLower(pageName)
+
     centralToken := utils.Config()["DROPBOX_CENTRAL_ACCOUNT_TOKEN"]
     indexData, err := GetIndex()
     if err != nil {
@@ -234,6 +243,7 @@ func WriteStringToPageShard(
     hash string,
     accessToken string,
 ) error {
+    pageName = strings.ToLower(pageName)
     ts := strconv.FormatUint(uint64(time.Now().UnixNano()), 10)
     centralToken := utils.Config()["DROPBOX_CENTRAL_ACCOUNT_TOKEN"]
     edit := PageEdit{
@@ -426,6 +436,8 @@ func GetPageFromShards(shards []PageShard) (string, error) {
 }
 
 func GetPageData(pageName string) (string, error) {
+    pageName = strings.ToLower(pageName)
+    
     shards, err := GetPageShards(pageName)
     if err != nil {
         return "", errors.New("Unable to retrieve page shards.")

@@ -4,7 +4,6 @@
 package handlers
 
 import (
-    "fmt"
     "net/http"
     "encoding/json"
     "strings"
@@ -70,9 +69,17 @@ func (h WriteHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
             return
         }
 
-        // Don't really know what to put here
+        pageData, err := dropbox.GetPageData(reqJson.PageName)
+        if err != nil {
+            utils.Abort(w, r, 400, "Wrote page but could not re-get.")
+        }
+
+        w.Header().Set("Content-Type", "application/json")
         w.WriteHeader(200)
-        fmt.Fprint(w, "Write was successful.")
+        json.NewEncoder(w).Encode(dropbox.Page{
+            Title: reqJson.PageName,
+            Data: pageData,
+        })
     } else {
         w.WriteHeader(404)
     }

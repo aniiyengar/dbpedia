@@ -3,6 +3,7 @@
 // Basically a stripped down, customized version of NPM remark-react.
 
 import React from 'react';
+import remark from 'remark';
 import mdastToHast from 'mdast-util-to-hast';
 import hastSanitize from 'hast-util-sanitize';
 import hastToHyper from 'hast-to-hyperscript';
@@ -12,6 +13,7 @@ const elementTransform = {
     'div': '',
     'a': '',
     'strong': '',
+    'em': '',
     'ul': 'dbp-ul',
     'ol': 'dbp-ol',
     'li': 'dbp-li',
@@ -26,6 +28,8 @@ const createElement = (name, props, children) => {
         // Default functionality for links in Markdown
         if (name == 'a') {
             props['target'] = '_blank';
+        } else if (name == 'h1') {
+            name = 'h2';
         }
 
         return React.createElement(
@@ -46,7 +50,7 @@ const createElement = (name, props, children) => {
     }
 };
 
-export default function() {
+const plugin = function() {
     this.Compiler = node => {
         const hastLoader = hastSanitize(
             {
@@ -67,3 +71,7 @@ export default function() {
         );
     };
 };
+
+export default text => {
+    return remark().use(plugin).processSync(text).contents;
+}

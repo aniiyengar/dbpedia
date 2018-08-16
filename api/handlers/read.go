@@ -24,11 +24,6 @@ func (h ReadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
         pageName := pageNames[0]
 
-        type pageResponse struct {
-            Title string `json:"page_name"`
-            Data string `json:"page_data"`
-        }
-
         pageData, err := dropbox.GetPageData(pageName)
         if err != nil {
             utils.Abort(w, r, 400, "Error retrieving page data.")
@@ -36,7 +31,7 @@ func (h ReadHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
         w.Header().Set("Content-Type", "application/json")
         w.WriteHeader(200)
-        json.NewEncoder(w).Encode(pageResponse{
+        json.NewEncoder(w).Encode(dropbox.Page{
             Title: pageName,
             Data: pageData,
         })
