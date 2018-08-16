@@ -72,7 +72,6 @@ class WikiPage extends React.Component {
                     className='dbp-editing-area'
                     value={this.state.clientPageData}
                     onChange={this.changeClientPageData}
-                    rows={6}
                     onResize={(e) => {}} />
             )
         } else if (
