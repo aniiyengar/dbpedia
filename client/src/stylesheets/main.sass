@@ -106,31 +106,40 @@ a
 
 h1.dbp-wiki-title
     margin-top: 30px
-    margin-bottom: 10px
-    font-size: 3em
+    margin-bottom: 24px
+    font-size: 2.5em
 
 h2.dbp-wiki-title
     margin-top: 30px
-    margin-bottom: 4px
+    margin-bottom: 14px
     font-size: 1.5em
 
 .dbp-ul, .dbp-ol
     list-style-position: outside
 
 .dbp-li
-    font-family: 'OpenSans Light'
-    color: $darkerGray
-    font-size: 1.1em
-    margin-top: 15px
-    line-height: 28px
     margin-left: 30px
 
-.dbp-p
+.dbp-li:last-child
+    margin-bottom: 16px
+
+.dbp-li:not(:last-child)
+    margin-bottom: 8px
+
+    .dbp-p
+        margin-bottom: 8px
+
+.dbp-p, .dbp-li
     font-family: 'OpenSans Light'
     color: $darkerGray
-    font-size: 1.1em
-    margin-top: 20px
+    font-size: 17px
     line-height: 28px
+
+.dbp-p
+    margin-bottom: 16px
+
+.dbp-li .dbp-p
+    margin-left: 15px
 
 .dbp-code
     font-family: 'RobotoMono Light'
@@ -212,7 +221,7 @@ h2.dbp-wiki-title
         color: $darkerGray
         display: inline-block
         float: left
-        height: calc(3em + 40px)
+        height: calc(2.5em + 40px)
         position: relative
         margin: 0 20px
         cursor: pointer
