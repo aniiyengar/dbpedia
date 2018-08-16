@@ -21,6 +21,10 @@ class WikiHome extends React.Component {
                     <strong>dbpedia</strong> is a collaborative wiki. Development is in progress.
                     Learn more <Link to='/about'>here</Link>.
                 </p>
+                <p className='dbp-p'>
+                    To visit a page (or create one if it doesn't exist) go
+                    to <span className='dbp-code'>https://wiki.aniruddh.co/w/[pagename]</span>.
+                </p>
             </div>
         );
     }

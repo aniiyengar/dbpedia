@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import {
     logout,
@@ -26,11 +26,6 @@ class WikiNav extends React.Component {
     getRightIcons() {
         if (this.props.loggedIn) {
             return [
-                <div
-                    key='nav-newpage'
-                    className='dbp-wiki-nav-item dbp-wiki-nav-right'>
-                    <FontAwesomeIcon icon={faPlus} />
-                </div>,
                 <div
                     key='nav-search'
                     className='dbp-wiki-nav-item dbp-wiki-nav-right'>
