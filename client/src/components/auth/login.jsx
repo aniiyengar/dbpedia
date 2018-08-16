@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Login extends React.Component {
     handleDropboxRedirect() {
         const clientId = 'yvgitye8tkofczl';
-        const redirectUri = 'http://localhost:8005/dropbox_redirect';
+        const redirectUri = DBPEDIA_HOSTNAME + '/dropbox_redirect';
         const state = 'nil';
 
         window.location =
