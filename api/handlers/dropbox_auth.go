@@ -34,10 +34,11 @@ func (h DropboxAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     // Verify code and get access token from Dropbox
     dbSecret := utils.Config()["DROPBOX_CLIENT_SECRET"]
     dbClientId := utils.Config()["DROPBOX_CLIENT_ID"]
+    hostname := utils.Config()["DBPEDIA_HOSTNAME"]
 
     reqString := "https://api.dropboxapi.com/oauth2/token?" +
         "client_id=" + dbClientId + "&" +
-        "redirect_uri=" + "http://localhost:8005/dropbox_redirect" + "&" +
+        "redirect_uri=" + hostname + "/dropbox_redirect" + "&" +
         "grant_type=" + "authorization_code" + "&" +
         "client_secret=" + dbSecret + "&" +
         "code=" + queryCode
