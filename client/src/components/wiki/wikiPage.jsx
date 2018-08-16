@@ -76,7 +76,6 @@ class WikiPage extends React.Component {
                     onResize={(e) => {}} />
             )
         } else if (
-            this.props.auth.dropboxAuthSecret === '' ||
             this.props.page.pageRequestOut ||
             this.props.page.pageWriteRequestOut
         ) {
