@@ -2,3 +2,5 @@
 node_modules
 static/
 conf.json
+api/api
+
