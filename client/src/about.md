@@ -29,8 +29,6 @@ The page shard consists of a newline-delimited set of **edits**, first encoded i
 
 The hash exists to solve edit conflicts; if two edits appear in sequence with inconsistent hashes, the second edit is discarded. Usually, this happens when User A loads a page, User B edits the page without User A refreshing, and then User A edits the page, sending the hash of the page before it was edited by User B. In User A's case, editing the page will force a reload, their edit will be discarded as an edit conflict, and they will see the up-to-date version of the page containing User B's edit.
 
-Making lots of HTTP requests to Dropbox can be slow and costly; while there is code to execute many requests in parallel, it doesn't matter much when pages and edits get more complicated. Additionally, the hash-based mechanism I used to solve edit conflicts gets pretty restrictive when lots of edits are being made at once. On top of that, any user who just edits or deletes their `dbpedia_data` folder could corrupt all pages that contain edits from that user. So, dbpedia isn't really a viable wiki; the [many proposals](https://en.wikipedia.org/wiki/User:HaeB/Timeline_of_distributed_Wikipedia_proposals) to build decentralized Wikipedias haven't gone far either. That being said, I think it's still an interesting one-off project to work on.
-
 ## Source code
 
 This is all on GitHub. To see how it works (and confirm it’s not doing anything weird with your data) you can view the source [here](https://github.com/aniiyengar/dbpedia). The app is written using Go and ES6, and the development and testing scripts are written in Python.
