@@ -14,7 +14,7 @@ $darkGray: #777
 $darkerGray: #444
 $darkBlue: rgb(32, 87, 155)
 $darkerBlue: rgb(16, 48, 89)
-$dist: 40px
+$dist: 60px
 
 *
     margin: 0
@@ -24,7 +24,6 @@ $dist: 40px
 html, body, #root
     width: 100%
     height: 100%
-    overflow: hidden
 
 a
     cursor: pointer
@@ -47,7 +46,7 @@ a
     display: flex
     flex-direction: row
     padding: 0 $dist * 4
-    font-family: 'Playfair Display'
+    font-family: 'Roboto Mono'
     font-weight: 700
     +noselect
 
@@ -70,8 +69,8 @@ a
         margin-right: auto
 
     .dbp-wiki-nav-right
-        font-family: 'Open Sans'
-        font-weight: 300
+        font-family: 'Roboto'
+        font-weight: 400
 
         &:not(:last-child)
             margin-right: 20px
@@ -91,7 +90,7 @@ a
     margin: auto
 
 .dbp-wiki-title
-    font-family: 'Playfair Display'
+    font-family: 'Roboto Mono'
     font-weight: 700
     color: $darkerGray
 
@@ -121,8 +120,8 @@ h2.dbp-wiki-title
         margin-bottom: 8px
 
 .dbp-p, .dbp-li
-    font-family: 'Open Sans'
-    font-weight: 300
+    font-family: 'Roboto'
+    font-weight: 400
     color: $darkerGray
     font-size: 17px
     line-height: 28px
@@ -135,7 +134,7 @@ h2.dbp-wiki-title
 
 .dbp-code
     font-family: 'Roboto Mono'
-    font-weight: 300
+    font-weight: 400
     font-size: 0.85em
     margin-top: 20px
     line-height: 28px
@@ -146,12 +145,12 @@ h2.dbp-wiki-title
 
 .dbp-ul, .dbp-ol, .dbp-p
     strong
-        font-family: 'Open Sans'
+        font-family: 'Roboto'
         font-weight: 600
         color: $darkerGray
 
     a
-        font-family: 'Open Sans'
+        font-family: 'Roboto'
         font-weight: 400
         text-decoration: none
         color: $darkBlue
@@ -164,7 +163,7 @@ h2.dbp-wiki-title
 
     a .dbp-code
         font-family: 'Roboto Mono'
-        font-weight: 300
+        font-weight: 400
 
 .dbp-button-prominent
     padding: 16px
@@ -174,7 +173,7 @@ h2.dbp-wiki-title
     border: none
     border-radius: 4px
     background-color: $mediumGray
-    font-family: 'Open Sans'
+    font-family: 'Roboto'
     font-weight: 600
     color: white
     margin: 30px 0
