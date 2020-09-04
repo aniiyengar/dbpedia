@@ -21,7 +21,7 @@
     "history": "^4.7.2",
     "md5": "^2.2.1",
     "mdast-util-to-hast": "^3.0.2",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.13.1",
     "query-string": "^6.1.0",
     "raw-loader": "^0.5.1",
     "react": "^16.4.2",
